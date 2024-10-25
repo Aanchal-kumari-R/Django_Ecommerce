@@ -118,9 +118,10 @@ $('.cart').click(function(){
   console.log(cart); 
   localStorage.setItem('cart',JSON.stringify(cart)); 
   document.getElementById('cart').innerHTML = Object.keys(cart).length;
-});
-</script>
-
+}); 
+$('#popcart').popover(); 
+document.getElementById("popcart").setAttribute('data-content','<h5>Cart</h5>');
+</script> 
 {% endblock  %}   
 
 
