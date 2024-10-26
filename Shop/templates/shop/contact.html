@@ -2,4 +2,29 @@
 
 {% block title %} ContactUs - My Awesome Cart {% endblock %} 
 
-{% block body %} This is our ContactUs page.{% endblock %}
+{% block body %}  
+<div class="container my-3">  
+    <h1>Contact Us</h1>
+    <form  action = "/shop/contact/" method="post" class="row g-3"> {% csrf_token %}
+        <div class="col-md-12">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name:">
+        </div> 
+        <div class="col-md-12">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email:">
+          </div> 
+          <div class="col-md-12">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="phone" class="form-control" id="phone" name = "phone" placeholder="Enter your Phone:">
+          </div>
+          <div class="col-12"> 
+            <label for="floatingTextarea">How may we help you?</label>
+            <textarea class="form-control p-3" name="desc" id="floatingTextarea"></textarea>
+          </div>
+        <div class="col-12 py-2">
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+</div>
+{% endblock %}
