@@ -27,4 +27,13 @@
         </div>
       </form>
 </div>
-{% endblock %}
+{% endblock %} 
+
+{% block js %} 
+{% if thanks %}  
+<script>
+alert("Thanks for Contacting Us. We will get back to soon!")
+document.location = "/shop/contact"; 
+</script>
+{% endif %}
+{% endblock  %}

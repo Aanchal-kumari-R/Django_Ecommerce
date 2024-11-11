@@ -20,15 +20,17 @@ def index(request):
 def about(request): 
     return render(request,"shop/about.html")
 
-def contact(request):  
+def contact(request):   
+    thanks = False
     if request.method == "POST": 
       name = request.POST.get('name','')
       email = request.POST.get('email','')
       phone = request.POST.get('phone','')
       desc = request.POST.get('desc','') 
       contact = Contact(name=name,email =email,phone=phone,desc=desc) 
-      contact.save()
-    return render(request,"shop/contact.html")
+      contact.save() 
+      thanks = True
+    return render(request,"shop/contact.html",{'thanks':thanks})
 
 def tracker(request):  
     if request.method == "POST":   
