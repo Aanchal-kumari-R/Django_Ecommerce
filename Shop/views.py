@@ -52,8 +52,31 @@ def tracker(request):
 
     return render(request,"shop/tracker.html")
 
-def search(request): 
-    return render(request,"shop/search.html") 
+def searchMatch(query,item):   
+    """ return true only if query matches the item """    
+    if query and isinstance(query, str):  # Ensure query is not None and is a string
+
+      if query in item.desc.lower() or query in item.product_name.lower() or query in item.category.lower():  
+        return True 
+      else:
+        return False 
+
+def search(request):   
+     query = request.GET.get('search')
+     allProds = [] 
+     catprods = Product.objects.values('category','id') 
+     cats = {item['category'] for item in catprods} 
+     for cat in cats: 
+        prodtemp = Product.objects.filter(category = cat) 
+        prod = [item for item in prodtemp if searchMatch(query,item)] 
+        n = len(prod) 
+        nSlides = n//4 + ceil((n/4)-(n//4))  
+        if len(prod)!=0:
+            allProds.append([prod,range(1,nSlides),nSlides]) 
+     params = {'allProds':allProds}  
+     if len(allProds) == 0 or len(query)<4: 
+         params = {'msg':"Please make sure to enter relevant search query"}
+     return render(request,"shop/search.html",params) 
 
 def productView(request,myid):  
     #fetch the product using the id 
